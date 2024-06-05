@@ -7,14 +7,17 @@ import java.io.FileNotFoundException;
 public class Wordle
 {
     public static Scanner inptr;
+    public static ArrayList<RoundRect> rects = new ArrayList<RoundRect>();
+    public static ArrayList<Text> letters = new ArrayList<Text>();
     public static ArrayList<String> words = new ArrayList<String>();
+    public static int guessCt;
      //50 left right margins, 10 between columns
      //50 up and down margins, 10 between rows
      //100 x 100 squares
     public static Pad board = new Pad(640, 750);
-    int[] xPoses = {50, 160, 270, 380, 490};
-    int[] yPoses = {50, 160, 270, 390, 490, 600};
-    int[][] colors = {{100, 175, 100}, {255, 200, 50}, {150}}; //green, yellow, grey
+    static int[] xPoses = {50, 160, 270, 380, 490};
+    static int[] yPoses = {50, 160, 270, 390, 490, 600};
+    static int[][] colors = {{100, 175, 100}, {255, 200, 50}, {150, 150, 150}}; //green, yellow, grey
 
     public static void main(String[] args)
     {
@@ -49,7 +52,7 @@ public class Wordle
         inptr =  new Scanner(System.in);
 
         String guess = inptGuess(true);
-        int guessCt = 1;
+        guessCt = 1;
         printAcc(guess, ans);
 
         while (!guess.equals(ans) && guessCt < 6)
@@ -93,13 +96,7 @@ public class Wordle
             System.out.print("Enter another 5-letter guess:");
             word = inptr.nextLine().toLowerCase();
         }
-        dispWord(word);
         return word;
-    }
-
-    public static dispWord()
-    {
-
     }
 
     public static void printAcc(String guess, String ans)
@@ -143,7 +140,29 @@ public class Wordle
         {
             build += acc[f].toString();
         }
-
+        dispAcc(guess, acc);
         System.out.println(build);
+    }
+
+    public static void dispAcc(String guess, Character[] acc)
+    {
+        int xInd = 0;
+        int colInd;
+        for (Character g : acc)
+        {
+            rects.add(new RoundRect(xPoses[xInd], yPoses[guessCt - 1], 100, 100, 25, 25));
+
+            if (g == 'O')
+                colInd = 0;
+            else if (g == '/')
+                colInd = 1;
+            else
+                colInd = 2;
+            rects.get(rects.size() - 1).setFillColor(colors[colInd][0], colors[colInd][1], colors[colInd][2]);
+            rects.get(rects.size() - 1).setStrokeWidth(0);
+            letters.add(new Text(guess.substring(xInd, xInd+1), xPoses[xInd] + 15, yPoses[guessCt-1] + 15, 90));
+            letters.get(letters.size() - 1).setFillColor(255);
+            xInd++;
+        }
     }
 }
