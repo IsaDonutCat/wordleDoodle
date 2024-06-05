@@ -42,13 +42,15 @@ public class Wordle
 
         String guess = inptGuess(true);
         int guessCt = 1;
+        printAcc(guess, ans);
 
-        while (!guess.equals(ans) && guessCt >= 6)
+        while (!guess.equals(ans) && guessCt < 6)
         {
-            printAcc(guess, ans);
-            guess = inptr.nextLine();
+            //System.out.print("while loop entered");
             guess = inptGuess(false);
+            printAcc(guess, ans);
             guessCt++;
+            //System.out.println(guessCt);
         }
 
         if (guess.equals(ans))
@@ -104,13 +106,13 @@ public class Wordle
             }
         }
 
-        len = charas.size();
-        for (int d = len - 1; d >= 0; d--)
+        for (int d = 0; d < 5; d++)
         {
             if (charas.contains(ans.substring(d,d+1)))
             {
-                acc[d] = '/';
-                charas.remove(d);
+                //System.out.println("contains " + ans.substring(d,d+1) + " at " + charas.indexOf(ans.substring(d,d+1)));
+                acc[charas.indexOf(ans.substring(d,d+1))] = '/';
+                charas.remove(charas.indexOf(ans.substring(d,d+1)));
             }
         }
 
