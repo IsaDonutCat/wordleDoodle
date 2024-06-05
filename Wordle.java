@@ -7,6 +7,8 @@ import java.util.function.IntPredicate;
 
 public class Wordle
 {
+    public static Scanner inptr;
+    public static ArrayList<String> words = new ArrayList<String>();
     public static void main(String[] args)
     {
         if (args.length != 1)
@@ -15,7 +17,6 @@ public class Wordle
             System.out.println("java Wordle wordList.csv");
             return;
         }
-        Scanner inptr;
         try
         {
             File inptWords = new File(args[0]);
@@ -27,7 +28,6 @@ public class Wordle
             return;
         }
         
-        ArrayList<String> words = new ArrayList<String>();
         String[] wordsArr = inptr.nextLine().split(",");
 
         for (String a : wordsArr)
@@ -40,13 +40,13 @@ public class Wordle
 
         inptr =  new Scanner(System.in);
 
-        System.out.print("Enter a 5-letter guess: ");
-        String guess = inptr.nextLine();
+        String guess = inptGuess(true);
         int guessCt = 1;
+        
         while (!guess.equals(ans) && guessCt >= 6)
         {
-            printAcc();
-            System.out.print("Enter another guess: ");
+            guess = inptGuess(false);
+            printAcc(guess, ans);
             guess = inptr.nextLine();
             guessCt++;
         }
@@ -60,5 +60,39 @@ public class Wordle
             System.out.println("Sorry, try again! The word this time was " + ans);
         }
         inptr.close();
+    }
+
+    public static String inptGuess(boolean first)
+    {
+        String word;
+        if (first)
+            System.out.print("Enter a 5-letter guess: ");
+        else
+            System.out.print("Enter another 5-letter guess: ");
+
+        word = inptr.nextLine().toLowerCase();
+
+        while (!words.contains(word))
+        {
+            if (word.length() > 5)
+                System.out.println("Your guess is too long.");
+            else if (word.length() < 5)
+                System.out.println("Your guess is too short.");
+            else
+                System.out.println("Your guess is not a valid 5-letter word.");
+            System.out.print("Enter another 5-letter guess:");
+            word = inptr.nextLine().toLowerCase();
+        }
+        return word;
+    }
+
+    public static void printAcc(String guess, String ans)
+    {
+        int len = guess.length();
+        ArrayList<String> charas = new ArrayList<String>();
+        for (int b = 0; b < len; b++)
+        {
+
+        }
     }
 }
