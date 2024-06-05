@@ -3,7 +3,6 @@ import java.util.ArrayList;
 import doodlepad.*;
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.util.function.IntPredicate;
 
 public class Wordle
 {
@@ -34,6 +33,7 @@ public class Wordle
         {
             words.add(a);
         }
+
         //choose a random word
         String ans = words.get((int) (Math.random() * words.size()));
         inptr.close();
@@ -45,9 +45,9 @@ public class Wordle
 
         while (!guess.equals(ans) && guessCt >= 6)
         {
-            guess = inptGuess(false);
             printAcc(guess, ans);
             guess = inptr.nextLine();
+            guess = inptGuess(false);
             guessCt++;
         }
 
