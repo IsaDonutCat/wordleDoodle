@@ -128,7 +128,7 @@ public class Wordle
         {
             if (charas.contains(ans.substring(d,d+1)))
             {
-                System.out.println("contains " + ans.substring(d,d+1) + " at " + charas.indexOf(ans.substring(d,d+1)));
+                //System.out.println("contains " + ans.substring(d,d+1) + " at " + charas.indexOf(ans.substring(d,d+1)));
                 acc[charas.indexOf(ans.substring(d,d+1))] = '/';
                 charas.set(charas.indexOf(ans.substring(d,d+1)), "/");
             }
@@ -167,7 +167,7 @@ public class Wordle
                 colInd = 2;
             rects.get(rects.size() - 1).setFillColor(colors[colInd][0], colors[colInd][1], colors[colInd][2]);
             rects.get(rects.size() - 1).setStrokeWidth(0);
-            letters.add(new Text(guess.substring(xInd, xInd+1).toUpperCase(), xPoses[xInd] + 10, yPoses[guessCt-1] + 10 100));
+            letters.add(new Text(guess.substring(xInd, xInd+1).toUpperCase(), xPoses[xInd] + 10, yPoses[guessCt-1] + 10, 100));
             letters.get(letters.size() - 1).setFillColor(255);
             xInd++;
         }
