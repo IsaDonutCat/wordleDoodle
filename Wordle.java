@@ -16,7 +16,7 @@ public class Wordle
      //100 x 100 squares
     public static Pad board;
     static int[] xPoses = {50, 160, 270, 380, 490};
-    static int[] yPoses = {50, 160, 270, 390, 490, 600};
+    static int[] yPoses = {50, 160, 270, 380, 490, 600};
     static int[][] colors = {{100, 175, 100}, {255, 200, 50}, {150, 150, 150}}; //green, yellow, grey
 
     public static void main(String[] args)
@@ -59,8 +59,10 @@ public class Wordle
         {
             //System.out.print("while loop entered");
             guess = inptGuess(false);
-            printAcc(guess, ans);
             guessCt++;
+            //rearranging some stuff to help
+            printAcc(guess, ans);
+
             //System.out.println(guessCt);
         }
 
@@ -108,11 +110,12 @@ public class Wordle
             charas.add(guess.substring(b, b+1));
         }
         Character[] acc = new Character[5];
-        for (int c = len - 1; c >= 0; c--) // first check for complete matches
+        for (int c = 0; c < 5; c++) // first check for complete matches
         {
-            if (charas.get(c).equals(ans.substring(c,c+1)))
+            if (ans.substring(c,c+1).equals(charas.get(c))) //strings equal eachother
             {
-                charas.remove(c);
+                charas.set(c, "/");
+                ans = ans.substring(0, c) + ":" + ans.substring(c+1);
                 acc[c] = 'O';
             }
         }
@@ -121,9 +124,9 @@ public class Wordle
         {
             if (charas.contains(ans.substring(d,d+1)))
             {
-                //System.out.println("contains " + ans.substring(d,d+1) + " at " + charas.indexOf(ans.substring(d,d+1)));
+                System.out.println("contains " + ans.substring(d,d+1) + " at " + charas.indexOf(ans.substring(d,d+1)));
                 acc[charas.indexOf(ans.substring(d,d+1))] = '/';
-                charas.remove(charas.indexOf(ans.substring(d,d+1)));
+                charas.set(charas.indexOf(ans.substring(d,d+1)), "/");
             }
         }
 
