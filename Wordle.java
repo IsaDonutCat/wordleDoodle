@@ -12,6 +12,10 @@ public class Wordle
      //50 up and down margins, 10 between rows
      //100 x 100 squares
     public static Pad board = new Pad(640, 750);
+    int[] xPoses = {50, 160, 270, 380, 490};
+    int[] yPoses = {50, 160, 270, 390, 490, 600};
+    int[][] colors = {{100, 175, 100}, {255, 200, 50}, {150}}; //green, yellow, grey
+
     public static void main(String[] args)
     {
         if (args.length != 1)
@@ -89,7 +93,13 @@ public class Wordle
             System.out.print("Enter another 5-letter guess:");
             word = inptr.nextLine().toLowerCase();
         }
+        dispWord(word);
         return word;
+    }
+
+    public static dispWord()
+    {
+
     }
 
     public static void printAcc(String guess, String ans)
