@@ -8,6 +8,10 @@ public class Wordle
 {
     public static Scanner inptr;
     public static ArrayList<String> words = new ArrayList<String>();
+     //50 left right margins, 10 between columns
+     //50 up and down margins, 10 between rows
+     //100 x 100 squares
+    public static Pad board = new Pad(640, 750);
     public static void main(String[] args)
     {
         if (args.length != 1)
