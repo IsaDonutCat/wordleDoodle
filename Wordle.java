@@ -42,7 +42,7 @@ public class Wordle
 
         String guess = inptGuess(true);
         int guessCt = 1;
-        
+
         while (!guess.equals(ans) && guessCt >= 6)
         {
             guess = inptGuess(false);
@@ -92,7 +92,42 @@ public class Wordle
         ArrayList<String> charas = new ArrayList<String>();
         for (int b = 0; b < len; b++)
         {
-
+            charas.add(guess.substring(b, b+1));
         }
+        Character[] acc = new Character[5];
+        for (int c = len - 1; c >= 0; c--) // first check for complete matches
+        {
+            if (charas.get(c).equals(ans.substring(c,c+1)))
+            {
+                charas.remove(c);
+                acc[c] = 'O';
+            }
+        }
+
+        len = charas.size();
+        for (int d = len - 1; d >= 0; d--)
+        {
+            if (charas.contains(ans.substring(d,d+1)))
+            {
+                acc[d] = '/';
+                charas.remove(d);
+            }
+        }
+
+        for (int e = 0; e < 5; e++)
+        {
+            if (acc[e] == null)
+            {
+                acc[e] = 'X';
+            }
+        }
+        String build = "";
+
+        for (int f = 0; f < 5; f++)
+        {
+            build += acc[f].toString();
+        }
+
+        System.out.println(build);
     }
 }
