@@ -74,7 +74,11 @@ public class Wordle
         {
             System.out.println("Sorry, try again! The word this time was " + ans);
         }
+        System.out.println("Hit enter to close the program.");
+        guess  = inptr.nextLine();
         inptr.close();
+        board.close();
+        return;
     }
 
     public static String inptGuess(boolean first)
@@ -163,7 +167,7 @@ public class Wordle
                 colInd = 2;
             rects.get(rects.size() - 1).setFillColor(colors[colInd][0], colors[colInd][1], colors[colInd][2]);
             rects.get(rects.size() - 1).setStrokeWidth(0);
-            letters.add(new Text(guess.substring(xInd, xInd+1).toUpperCase(), xPoses[xInd] + 15, yPoses[guessCt-1] + 15, 100));
+            letters.add(new Text(guess.substring(xInd, xInd+1).toUpperCase(), xPoses[xInd] + 10, yPoses[guessCt-1] + 10 100));
             letters.get(letters.size() - 1).setFillColor(255);
             xInd++;
         }
