@@ -14,7 +14,7 @@ public class Wordle
      //50 left right margins, 10 between columns
      //50 up and down margins, 10 between rows
      //100 x 100 squares
-    public static Pad board = new Pad(640, 750);
+    public static Pad board;
     static int[] xPoses = {50, 160, 270, 380, 490};
     static int[] yPoses = {50, 160, 270, 390, 490, 600};
     static int[][] colors = {{100, 175, 100}, {255, 200, 50}, {150, 150, 150}}; //green, yellow, grey
@@ -37,7 +37,7 @@ public class Wordle
             System.out.println("Error: Word list not found");
             return;
         }
-        
+        board= new Pad(640, 750);
         String[] wordsArr = inptr.nextLine().split(",");
 
         for (String a : wordsArr)
@@ -160,7 +160,7 @@ public class Wordle
                 colInd = 2;
             rects.get(rects.size() - 1).setFillColor(colors[colInd][0], colors[colInd][1], colors[colInd][2]);
             rects.get(rects.size() - 1).setStrokeWidth(0);
-            letters.add(new Text(guess.substring(xInd, xInd+1), xPoses[xInd] + 15, yPoses[guessCt-1] + 15, 90));
+            letters.add(new Text(guess.substring(xInd, xInd+1).toUpperCase(), xPoses[xInd] + 15, yPoses[guessCt-1] + 15, 100));
             letters.get(letters.size() - 1).setFillColor(255);
             xInd++;
         }
