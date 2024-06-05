@@ -38,5 +38,27 @@ public class Wordle
         String ans = words.get((int) (Math.random() * words.size()));
         inptr.close();
 
+        inptr =  new Scanner(System.in);
+
+        System.out.print("Enter a 5-letter guess: ");
+        String guess = inptr.nextLine();
+        int guessCt = 1;
+        while (!guess.equals(ans) && guessCt >= 6)
+        {
+            printAcc();
+            System.out.print("Enter another guess: ");
+            guess = inptr.nextLine();
+            guessCt++;
+        }
+
+        if (guess.equals(ans))
+        {
+            System.out.println("Congratulations! You guessed the word in " + guessCt + " guesses!");
+        }
+        else
+        {
+            System.out.println("Sorry, try again! The word this time was " + ans);
+        }
+        inptr.close();
     }
 }
